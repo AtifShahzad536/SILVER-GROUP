@@ -120,7 +120,7 @@ export default function HistorySlider() {
     <div className="relative w-full min-h-screen font-sans overflow-hidden bg-gray-150">
       {/* Background year watermark */}
       <div className="absolute inset-0 flex items-end justify-center pointer-events-none select-none overflow-hidden z-0">
-        <span 
+        <span
           className={`font-black tracking-tighter leading-none transition-all duration-500 text-8xl md:text-9xl lg:text-[22rem] opacity-${animating ? '0' : '100'}`}
           style={{ color: "rgba(0,0,0,0.055)", lineHeight: 1, paddingBottom: "8vh" }}
         >
@@ -142,7 +142,7 @@ export default function HistorySlider() {
         {/* Right: Text - Positioned higher */}
         <div className={`transition-all duration-400 flex items-start justify-center ${animating ? 'opacity-0' : 'opacity-100'} ${animating ? (direction === 'right' ? 'translate-x-10' : '-translate-x-10') : 'translate-x-0'}`}>
           <div className="mt-[-2rem]">
-            <p 
+            <p
               className="uppercase tracking-widest font-normal mb-3 text-xs md:text-sm"
               style={{ color: slide.accent, letterSpacing: "0.2em", fontFamily: "'Arial', sans-serif" }}
             >
@@ -165,7 +165,7 @@ export default function HistorySlider() {
           <div className="absolute top-5 left-6 md:left-16 lg:left-20 right-6 md:right-16 lg:right-20 h-px bg-gray-300"></div>
 
           {/* Dots + labels */}
-          <div 
+          <div
             ref={timelineRef}
             className="flex justify-between items-start overflow-x-auto scrollbar-hide pb-1 gap-2 md:gap-4"
           >
@@ -175,17 +175,15 @@ export default function HistorySlider() {
                 onClick={() => goTo(i)}
                 className={`timeline-${i === current ? "active" : "dot"} flex flex-col items-center flex-shrink-0 min-w-[60px] md:min-w-[70px] outline-none`}
               >
-                <div 
-                  className={`w-4 h-4 rounded-full transition-all duration-300 mb-1.5 ${
-                    i === current 
-                      ? 'w-5 h-5 bg-gray-900 border-3 border-gray-900 scale-110 shadow-lg' 
+                <div
+                  className={`w-4 h-4 rounded-full transition-all duration-300 mb-1.5 ${i === current
+                      ? 'w-5 h-5 bg-gray-900 border-3 border-gray-900 scale-110 shadow-lg'
                       : 'w-2.5 h-2.5 bg-gray-400 border-2 border-gray-400'
-                  }`}
+                    }`}
                 />
-                <span 
-                  className={`text-xs md:text-sm transition-all duration-300 ${
-                    i === current ? 'text-gray-900 font-bold' : 'text-gray-500 font-normal'
-                  }`}
+                <span
+                  className={`text-xs md:text-sm transition-all duration-300 ${i === current ? 'text-gray-900 font-bold' : 'text-gray-500 font-normal'
+                    }`}
                 >
                   {s.year}
                 </span>

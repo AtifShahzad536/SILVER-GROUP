@@ -59,12 +59,11 @@ export default function ClothingShowcase() {
   const toggle = (id) => setActiveId((prev) => (prev === id ? null : id));
 
   return (
-    <div className="w-full">
-      <div className="w-full max-w-[1400px] mx-auto">
+      <div className="w-full">
         {/* Image Container — everything lives inside */}
         <div
           className="relative w-full overflow-hidden"
-          style={{ paddingBottom: "49.95%" /* 999/2000 */ }}
+          style={{ paddingBottom: "49.95%" /* 999/2000 ratio */ }}
         >
           {/* Background image */}
           <img
@@ -78,7 +77,7 @@ export default function ClothingShowcase() {
           <div className="absolute inset-0 bg-black/20" />
 
           {/* CLOTHING heading + SEE MORE — overlaid on image top-center */}
-          <div className="absolute top-[12%] left-0 right-0 flex flex-col items-center gap-1 md:gap-4 z-10">
+          <div className="absolute top-[8%] left-0 right-0 flex flex-col items-center gap-[2%] z-10">
             <h1
               className="text-white font-black tracking-[0.2em] text-sm sm:text-3xl md:text-5xl lg:text-6xl"
               style={{ fontFamily: "'Oswald', 'Arial Black', sans-serif" }}
@@ -136,7 +135,7 @@ export default function ClothingShowcase() {
                   >
                     {/* Arrow */}
                     <div
-                      className="absolute w-2 h-2 bg-black/90 border-l border-t border-white/20"
+                      className="absolute w-[8%] h-[8%] bg-black/90 border-l border-t border-white/20"
                       style={getArrowStyle(spot)}
                     />
 
@@ -163,9 +162,8 @@ export default function ClothingShowcase() {
           })}
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 
 // Position popup above/below and left/right based on spot location
@@ -173,7 +171,7 @@ function getPopupPosition(spot) {
   const leftPct = parseFloat(spot.left);
   const topPct = parseFloat(spot.top);
 
-  const vertical = topPct > 55 ? { bottom: "calc(100% + 14px)", top: "auto" } : { top: "calc(100% + 14px)", bottom: "auto" };
+  const vertical = topPct > 55 ? { bottom: "calc(100% + 2.5%)", top: "auto" } : { top: "calc(100% + 2.5%)", bottom: "auto" };
   const horizontal = leftPct > 70 ? { right: "0", left: "auto" } : leftPct < 30 ? { left: "0", right: "auto" } : { left: "50%", transform: "translateX(-50%)" };
 
   return { ...vertical, ...horizontal };
@@ -184,8 +182,8 @@ function getArrowStyle(spot) {
   const topPct = parseFloat(spot.top);
 
   const isAbove = topPct > 55;
-  const v = isAbove ? { bottom: "-6px", top: "auto", transform: "rotate(225deg)" } : { top: "-6px", bottom: "auto", transform: "rotate(45deg)" };
-  const h = leftPct > 70 ? { right: "16px", left: "auto" } : leftPct < 30 ? { left: "16px", right: "auto" } : { left: "50%", marginLeft: "-5px" };
+  const v = isAbove ? { bottom: "-4%", top: "auto", transform: "rotate(225deg)" } : { top: "-4%", bottom: "auto", transform: "rotate(45deg)" };
+  const h = leftPct > 70 ? { right: "12%", left: "auto" } : leftPct < 30 ? { left: "12%", right: "auto" } : { left: "50%", marginLeft: "-2%" };
 
   return { ...v, ...h };
 }

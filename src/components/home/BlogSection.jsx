@@ -42,12 +42,12 @@ function CalendarIcon() {
 
 function BlogCard({ blog }) {
   return (
-    <article className="border border-gray-200 rounded-xl overflow-hidden cursor-pointer hover:border-gray-400 transition-colors duration-200 bg-white h-full">
+    <article className="group border-b border-gray-100 overflow-hidden cursor-pointer hover:bg-gray-50 transition-colors duration-200 bg-white h-full">
       <div className="w-full h-[200px] bg-gray-100 overflow-hidden">
         <img
           src={blog.image}
           alt={blog.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           onError={(e) => { e.target.style.display = "none"; }}
         />
       </div>
@@ -87,8 +87,8 @@ export default function BlogSection() {
   };
 
   return (
-    <section className="w-full bg-white py-12 px-4 md:px-6 lg:px-8">
-      <div className="max-w-[1200px] mx-auto">
+    <section className="w-full bg-white py-[5%] px-[5%]">
+      <div className="w-full">
 
        
 
@@ -144,7 +144,7 @@ export default function BlogSection() {
         </div>
 
         {/* DESKTOP: 3-col grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-[2.5%]">
           {blogs.map((blog) => (
             <BlogCard key={blog.id} blog={blog} />
           ))}

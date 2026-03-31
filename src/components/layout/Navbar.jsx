@@ -14,81 +14,43 @@ const Navbar = () => {
     PRODUCTS: {
       categories: [
         {
-          name: 'BALLS',
+          name: 'PRODUCT 1',
           subCategories: [
-            { name: 'SEE ALL', image: 'https://images.unsplash.com/photo-1614632537190-23e4146777db?q=80&w=150&auto=format&fit=crop' },
-            { name: 'FOOTBALLS', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=150&auto=format&fit=crop' },
-            { name: 'HANDBALLS', image: 'https://images.unsplash.com/photo-1552667466-07770ae110d0?q=80&w=150&auto=format&fit=crop' },
-            { name: 'FUTSAL', image: 'https://images.unsplash.com/photo-1518605388461-9c1682f63eef?q=80&w=150&auto=format&fit=crop' },
-            { name: 'OTHER BALLS', image: 'https://images.unsplash.com/photo-1587329310686-91414b8e3cb7?q=80&w=150&auto=format&fit=crop' }
+            { name: 'PRODUCT SUBMENU 1', image: 'https://images.unsplash.com/photo-1614632537190-23e4146777db?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 2', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 3', image: 'https://images.unsplash.com/photo-1552667466-07770ae110d0?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 4', image: 'https://images.unsplash.com/photo-1518605388461-9c1682f63eef?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 5', image: 'https://images.unsplash.com/photo-1587329310686-91414b8e3cb7?q=80&w=150&auto=format&fit=crop' }
           ]
         },
         {
-          name: 'CLOTHING',
+          name: 'PRODUCT 2',
           subCategories: [
-            { name: 'SEE ALL', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=150&auto=format&fit=crop' },
-            { name: 'MATCH & TRAINING WEAR', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=150&auto=format&fit=crop' },
-            { name: 'LEISURE WEAR', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=150&auto=format&fit=crop' },
-            { name: 'GOALKEEPER WEAR', image: 'https://images.unsplash.com/photo-1556815302-09bb5e2f750c?q=80&w=150&auto=format&fit=crop' },
-            { name: 'REFEREE WEAR', image: 'https://images.unsplash.com/photo-1584844284814-c10f84aab73f?q=80&w=150&auto=format&fit=crop' },
-            { name: 'BASELAYER', image: 'https://images.unsplash.com/photo-1618354691438-25bc04584c23?q=80&w=150&auto=format&fit=crop' },
-            { name: 'ACCESSORIES', image: 'https://images.unsplash.com/photo-1585834887375-7b1897b6a94f?q=80&w=150&auto=format&fit=crop' }
+            { name: 'PRODUCT SUBMENU 1', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 2', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 3', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=150&auto=format&fit=crop' }
           ]
         },
         {
-          name: 'TEAMGEAR',
+          name: 'PRODUCT 3',
           subCategories: [
-            { name: 'SEE ALL', image: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=150&auto=format&fit=crop' },
-            { name: 'SHIN GUARDS', image: 'https://images.unsplash.com/photo-1590483256059-e31460c5cff9?q=80&w=150&auto=format&fit=crop' },
-            { name: 'BALL- & SPORTS BAGS', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=150&auto=format&fit=crop' },
-            { name: 'RESIN PRODUCTS', image: 'https://images.unsplash.com/photo-1584735935682-167814db35ed?q=80&w=150&auto=format&fit=crop' },
-            { name: 'BALL EQUIPMENT', image: 'https://images.unsplash.com/photo-1624880357913-a8539238165b?q=80&w=150&auto=format&fit=crop' },
-            { name: 'TRAINING EQUIPMENT', image: 'https://images.unsplash.com/photo-1599058917765-a780eda07a3e?q=80&w=150&auto=format&fit=crop' },
-            { name: 'REFEREE EQUIPMENT', image: 'https://images.unsplash.com/photo-1588612143162-87a718d09553?q=80&w=150&auto=format&fit=crop' },
-            { name: 'TRAINING PACKAGES', image: 'https://images.unsplash.com/photo-1518605388461-9c1682f63eef?q=80&w=150&auto=format&fit=crop' },
-            { name: 'BIBS & CAPTAINS BAND', image: 'https://images.unsplash.com/photo-1541252260730-0412e8e2108e?q=80&w=150&auto=format&fit=crop' },
-            { name: 'OTHER', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=150&auto=format&fit=crop' }
+            { name: 'PRODUCT SUBMENU 1', image: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 2', image: 'https://images.unsplash.com/photo-1590483256059-e31460c5cff9?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 3', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=150&auto=format&fit=crop' }
           ]
         },
         {
-          name: 'PROFCARE',
+          name: 'PRODUCT 4',
           subCategories: [
-            { name: 'SEE ALL', image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=150&auto=format&fit=crop' },
-            { name: 'SPORTS SUPPORTS', image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=150&auto=format&fit=crop' },
-            { name: 'SPORTS CARE', image: 'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?q=80&w=150&auto=format&fit=crop' }
+            { name: 'PRODUCT SUBMENU 1', image: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 2', image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=150&auto=format&fit=crop' }
           ]
         },
         {
-          name: 'MY TRAINING',
+          name: 'PRODUCT 5',
           subCategories: [
-            { name: 'SEE ALL', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150&auto=format&fit=crop' },
-            { name: 'TRAINING BANDS', image: 'https://images.unsplash.com/photo-1588612143162-87a718d09553?q=80&w=150&auto=format&fit=crop' },
-            { name: 'GYM BALLS', image: 'https://images.unsplash.com/photo-1518605388461-9c1682f63eef?q=80&w=150&auto=format&fit=crop' }
-          ]
-        },
-        {
-          name: 'GOALKEEPER',
-          subCategories: [
-            { name: 'SEE ALL', image: 'https://images.unsplash.com/photo-1556815302-09bb5e2f750c?q=80&w=150&auto=format&fit=crop' },
-            { name: 'GOALKEEPER GLOVES', image: 'https://images.unsplash.com/photo-1614632537190-23e4146777db?q=80&w=150&auto=format&fit=crop' },
-            { name: 'WEAR', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=150&auto=format&fit=crop' }
-          ]
-        },
-        {
-          name: 'REFEREE',
-          subCategories: [
-            { name: 'CLOTHING', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=150&auto=format&fit=crop' },
-            { name: 'EQUIPMENT', image: 'https://images.unsplash.com/photo-1541252260730-0412e8e2108e?q=80&w=150&auto=format&fit=crop' }
-          ]
-        },
-        {
-          name: 'KIDS',
-          subCategories: [
-            { name: 'SEE ALL', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=150&auto=format&fit=crop' },
-            { name: 'BALLS', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=150&auto=format&fit=crop' },
-            { name: 'CLOTHING', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=150&auto=format&fit=crop' },
-            { name: 'SPORTS SUPPORT', image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=150&auto=format&fit=crop' },
-            { name: 'GOALKEEPER GLOVES', image: 'https://images.unsplash.com/photo-1614632537190-23e4146777db?q=80&w=150&auto=format&fit=crop' }
+            { name: 'PRODUCT SUBMENU 1', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=150&auto=format&fit=crop' },
+            { name: 'PRODUCT SUBMENU 2', image: 'https://images.unsplash.com/photo-1588612143162-87a718d09553?q=80&w=150&auto=format&fit=crop' }
           ]
         }
       ],
@@ -156,7 +118,7 @@ const Navbar = () => {
     },
     EXPLORE: {
       categories: [
-        'GUIDES', 'CATALOGUE', 'SELECT LAB'
+        'GUIDES', 'CATALOGUE', 'SILVER STAR LAB'
       ],
       hideChevrons: true,
       bottomImage: {
@@ -167,7 +129,7 @@ const Navbar = () => {
     },
     'ABOUT US': {
       categories: [
-        'ABOUT SELECT', 'CONTACT', 'CSR', 'ENVIROMENTAL TRANSITION',
+        'ABOUT SILVER STAR', 'CONTACT', 'CSR', 'ENVIROMENTAL TRANSITION',
         'PRESS & NEWS', 'CHARITY', 'SPONSORSHIPS'
       ],
       hideChevrons: true,
@@ -186,6 +148,8 @@ const Navbar = () => {
     'SPORT',
     'EXPLORE',
     'PARTNER WITH US',
+    'COMPLIANCE',
+    'CERTIFICATION',
     'ABOUT US'
   ];
 
@@ -194,12 +158,17 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
 
-          {/* Logo */}
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="relative w-8 h-8 md:w-10 md:h-10 flex flex-col items-center justify-center">
-              <div className="absolute top-0 w-0 h-0 border-l-[16px] md:border-l-[20px] border-l-transparent border-r-[16px] md:border-r-[20px] border-r-transparent border-b-[28px] md:border-b-[35px] border-b-black group-hover:scale-110 transition-transform duration-300" />
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="relative w-9 h-9 md:w-11 md:h-11 flex items-center justify-center overflow-hidden">
+              <img
+                src="/logo_silverstar1.png"
+                alt="Silver Star Group"
+                className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
-            <span className="text-xl md:text-2xl font-black tracking-tighter mt-1">SELECT</span>
+            {/* <span className="text-base md:text-lg font-bold tracking-tight text-gray-900 mt-0.5 whitespace-nowrap">
+              Silver Star
+            </span> */}
           </div>
 
           {/* Desktop Navigation Links — hidden below lg */}
@@ -209,20 +178,28 @@ const Navbar = () => {
                 key={link}
                 className="flex items-center gap-1 cursor-pointer group"
                 onClick={() => {
-                  if (activeDrawer === link) {
-                    setActiveDrawer(null);
+                  if (drawerData[link] || link === 'PARTNER WITH US') {
+                    if (activeDrawer === link) {
+                      setActiveDrawer(null);
+                    } else {
+                      setActiveDrawer(link);
+                    }
                   } else {
-                    setActiveDrawer(link);
+                    // Navigate directly or handle as a standalone link
+                    console.log(`Navigating to ${link}`);
+                    setActiveDrawer(null);
                   }
                 }}
               >
-                <span className={`nav-link text-xs tracking-widest ${activeDrawer === link ? 'font-bold' : ''}`}>
+                <span className={`nav-link text-[10px] md:text-[11px] font-medium tracking-[0.15em] ${activeDrawer === link ? 'font-bold' : ''}`}>
                   {link}
                 </span>
-                <ChevronDown
-                  size={14}
-                  className={`transition-transform duration-300 ${activeDrawer === link ? 'rotate-180' : 'group-hover:rotate-180'}`}
-                />
+                {(drawerData[link] || link === 'PARTNER WITH US') && (
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-300 ${activeDrawer === link ? 'rotate-180' : 'group-hover:rotate-180'}`}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -235,7 +212,7 @@ const Navbar = () => {
                 <Globe size={14} className="text-white" />
               </div>
               <span className="text-xs font-normal flex items-center gap-1">
-                International <ChevronDown size={12} />
+                International
               </span>
             </div>
 

@@ -1,6 +1,6 @@
 export default function SustainabilitySection() {
   return (
-    <section 
+    <section
       className="w-full mx-auto px-6 my-12"
       style={{
         background: 'linear-gradient(90deg, rgba(68, 68, 68, 1), rgba(198, 199, 200, 1) 100%)'
