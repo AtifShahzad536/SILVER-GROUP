@@ -87,7 +87,7 @@ export default function BlogSection() {
   };
 
   return (
-    <section className="w-full bg-sports-secondary py-[5%] px-[5%] border-t border-white/5 shadow-2xl">
+    <section className="w-full bg-sports-secondary py-[5%] px-[2%] border-t border-white/5 shadow-2xl">
       <div className="w-full">
 
        

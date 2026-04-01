@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function SustainabilitySection() {
   return (
-    <section className="relative w-full overflow-hidden bg-black px-[5%] py-12">
+    <section className="relative w-full overflow-hidden bg-black px-[2%] py-12">
       <div className="flex flex-col md:flex-row h-auto md:h-[650px] w-full border-x border-white/10">
 
         {/* Left Pane - Environmental Transition */}

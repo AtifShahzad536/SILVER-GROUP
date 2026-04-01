@@ -55,7 +55,7 @@ export default function ClothingShowcase() {
   const toggle = (id) => setActiveId((prev) => (prev === id ? null : id));
 
   return (
-    <section className="relative w-full bg-black px-[5%] py-12">
+    <section className="relative w-full bg-black px-[2%] py-12">
       <div
         className="relative w-full overflow-hidden border-2 border-white/5"
         style={{ paddingBottom: "49.95%" }}

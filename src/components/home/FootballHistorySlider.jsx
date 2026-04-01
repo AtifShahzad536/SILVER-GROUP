@@ -79,11 +79,12 @@ const slides = [
 
 export default function HistorySlider() {
   const [current, setCurrent] = useState(2);
+  const [isExpanded, setIsExpanded] = useState(false);
   const scrollRef = useRef(null);
 
-  const next = () => setCurrent((prev) => (prev + 1) % slides.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-  const goTo = (index) => setCurrent(index);
+  const next = () => { setCurrent((prev) => (prev + 1) % slides.length); setIsExpanded(false); };
+  const prev = () => { setCurrent((prev) => (prev - 1 + slides.length) % slides.length); setIsExpanded(false); };
+  const goTo = (index) => { setCurrent(index); setIsExpanded(false); };
 
   return (
     <section className="relative w-full min-h-[600px] md:min-h-[750px] bg-[#0A0A0A] overflow-hidden">
@@ -96,7 +97,7 @@ export default function HistorySlider() {
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.4 }}
             className="text-[30vw] font-black text-white"
           >
             {slides[current].year}
@@ -104,7 +105,7 @@ export default function HistorySlider() {
         </AnimatePresence>
       </div>
 
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-16 py-16 flex flex-col items-center h-full min-h-[inherit]">
+      <div className="relative z-10 max-w-[1440px] mx-auto px-[2%] py-16 flex flex-col items-center h-full min-h-[inherit]">
 
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center flex-1">
 
@@ -116,7 +117,7 @@ export default function HistorySlider() {
                 initial={{ opacity: 0, rotate: -10, scale: 0.8 }}
                 animate={{ opacity: 1, rotate: 0, scale: 1 }}
                 exit={{ opacity: 0, rotate: 10, scale: 0.8 }}
-                transition={{ duration: 0.7, ease: 'easeOut' }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
                 className="w-full max-w-[500px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
               >
                 <img
@@ -136,31 +137,42 @@ export default function HistorySlider() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.3 }}
               >
                 <p className="text-[#F26522] font-black text-sm tracking-[0.3em] uppercase mb-4">
                   HISTORICAL HERITAGE • {slides[current].year}
                 </p>
-                <h1 className="text-white font-bold text-3xl md:text-5xl lg:text-5xl uppercase tracking-tight leading-none mb-8">
+                <h1 className="text-white font-bold text-3xl md:text-5xl lg:text-5xl uppercase tracking-tight leading-none mb-4 md:mb-8">
                   {slides[current].title}
                 </h1>
-                <p className="text-slate-400 font-medium text-sm md:text-lg leading-relaxed mb-12">
-                  {slides[current].description}
-                </p>
+                
+                <div className="relative mb-8">
+                  <p className={`text-slate-400 font-medium text-sm md:text-lg leading-relaxed ${!isExpanded ? 'line-clamp-3' : ''}`}>
+                    {slides[current].description}
+                  </p>
+                  {slides[current].description.length > 150 && (
+                     <button 
+                       onClick={() => setIsExpanded(!isExpanded)}
+                       className="text-[#F26522] font-black text-[10px] uppercase tracking-widest mt-2 hover:underline"
+                     >
+                       {isExpanded ? 'Show Less [-]' : 'Read More [+]'}
+                     </button>
+                  )}
+                </div>
               </motion.div>
             </AnimatePresence>
 
             {/* Solid Arrow Navigation */}
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-6 mt-4">
               <button
                 onClick={prev}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-[#F26522] hover:border-[#F26522] hover:scale-110 active:scale-95 group"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-[#F26522] hover:border-[#F26522] hover:scale-110 active:scale-95 group"
               >
                 <FiChevronLeft size={20} className="group-hover:-translate-x-0.5 transition-transform" />
               </button>
               <button
                 onClick={next}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-[#F26522] hover:border-[#F26522] hover:scale-110 active:scale-95 group"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-[#F26522] hover:border-[#F26522] hover:scale-110 active:scale-95 group"
               >
                 <FiChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
               </button>

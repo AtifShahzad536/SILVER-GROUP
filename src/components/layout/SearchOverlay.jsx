@@ -104,7 +104,7 @@ const SearchOverlay = ({ isOpen, onClose }) => {
             className="fixed top-0 left-0 right-0 z-[2010] bg-black shadow-2xl border-b border-white/5"
           >
             {/* Fluid 5% Gutter Sync */}
-            <div className="w-full px-[5%] py-6 md:py-10">
+            <div className="w-full px-[2%] py-6 md:py-10">
               
               <div className="flex items-center justify-between gap-6 md:gap-12">
                 

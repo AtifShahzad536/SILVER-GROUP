@@ -174,7 +174,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="sticky top-0 z-[1000] w-full bg-[#0A0A0A] border-b border-white/5 shadow-2xl translate-y-0">
-        <div className="w-full px-[5%] h-16 md:h-20 flex items-center justify-between">
+        <div className="w-full px-[2%] h-16 md:h-20 flex items-center justify-between">
 
           <div className="flex items-center gap-3 group cursor-pointer">
             <div className="relative w-9 h-9 md:w-11 md:h-11 flex items-center justify-center overflow-hidden">
@@ -184,9 +184,6 @@ const Navbar = () => {
                 className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
               />
             </div>
-            {/* <span className="text-base md:text-lg font-bold tracking-tight text-gray-900 mt-0.5 whitespace-nowrap">
-              Silver Star
-            </span> */}
           </div>
 
           <div className="hidden lg:flex items-center gap-10">
@@ -202,7 +199,6 @@ const Navbar = () => {
                       setActiveDrawer(link);
                     }
                   } else {
-                    // Navigate directly or handle as a standalone link
                     console.log(`Navigating to ${link}`);
                     setActiveDrawer(null);
                   }

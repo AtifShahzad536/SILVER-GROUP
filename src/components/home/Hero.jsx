@@ -22,7 +22,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/35" />
 
       {/* Content */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-end pb-[8%] px-[5%]">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-end pb-[8%] px-[2%]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

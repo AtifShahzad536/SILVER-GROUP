@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function GoalkeeperGlovesSection() {
   return (
-    <section className="w-full bg-black py-16 px-[5%]">
+    <section className="w-full bg-black py-16 px-[2%]">
       <div className="w-full flex flex-col md:flex-row gap-[3%] items-stretch">
         
         {/* Left - Elite Spec Card */}
