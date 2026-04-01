@@ -1,220 +1,141 @@
 import React, { useState, useEffect } from 'react';
-import { X, ChevronRight, ChevronLeft } from 'lucide-react';
+import { X, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NavigationDrawer = ({ isOpen, onClose, data }) => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHoveringBackdrop, setIsHoveringBackdrop] = useState(false);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(null);
-
-  const { 
-    categories = [], 
-    bottomImage = null,
-    hideChevrons = false
-  } = data || {};
+  const [expandedIdx, setExpandedIdx] = useState(null);
+  const { categories = [] } = data || {};
 
   useEffect(() => {
-    // Reset state when drawer data/type changes
-    setCurrentSlideIndex(0);
-    setActiveCategoryIndex(null);
-  }, [data, isOpen]);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    if (isOpen) {
-      window.addEventListener('mousemove', handleMouseMove);
-    }
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
+    if (!isOpen) setExpandedIdx(null);
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isOpen]);
-
-  let isSlider = Array.isArray(bottomImage);
-  let activeImageContent = null;
-  if (isSlider && bottomImage.length > 0) {
-    activeImageContent = bottomImage[currentSlideIndex];
-  } else if (!isSlider && bottomImage) {
-    activeImageContent = bottomImage;
-  }
-
-  const handleNextSlide = (e) => {
-    e.stopPropagation();
-    if (isSlider) {
-      setCurrentSlideIndex((prev) => (prev + 1) % bottomImage.length);
-    }
+  const toggleCategory = (idx) => {
+    setExpandedIdx(expandedIdx === idx ? null : idx);
   };
-
-  const handlePrevSlide = (e) => {
-    e.stopPropagation();
-    if (isSlider) {
-      setCurrentSlideIndex((prev) => (prev === 0 ? bottomImage.length - 1 : prev - 1));
-    }
-  };
-
-  // Resolve current active category payload
-  const activeCat = activeCategoryIndex !== null ? categories[activeCategoryIndex] : null;
-  const hasSubMenu = activeCat && typeof activeCat === 'object' && activeCat.subCategories && activeCat.subCategories.length > 0;
 
   return (
     <>
+      {/* Backdrop */}
       <div 
-        className={`fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm cursor-none transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 z-[60] bg-black/70 transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
-        onMouseEnter={() => setIsHoveringBackdrop(true)}
-        onMouseLeave={() => setIsHoveringBackdrop(false)}
-      >
-        {isOpen && isHoveringBackdrop && (
-          <div 
-            className="fixed pointer-events-none w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg transition-transform duration-75"
-            style={{ 
-              left: mousePos.x - 20, 
-              top: mousePos.y - 20,
-              zIndex: 9999
-            }}
-          >
-            <X size={18} className="text-black" />
-          </div>
-        )}
-      </div>
+      />
 
-      <div className={`fixed top-0 left-0 h-[100dvh] bg-white z-[65] shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] transform flex flex-row ${isOpen ? 'translate-x-0' : '-translate-x-full'} ${hasSubMenu ? 'w-[750px] max-w-[95vw]' : 'w-[400px] max-w-[85vw]'}`}>
+      {/* COMPACT DRAWER CONTAINER */}
+      <div className={`fixed top-0 left-0 h-[100dvh] bg-[#0A0A0A] z-[120] shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] transform flex flex-col border-r border-white/5 ${isOpen ? 'translate-x-0' : '-translate-x-full'} w-[380px] max-w-[90vw]`}>
         
-        {/* LEFT COLUMN - Main Categories */}
-        <div className="flex flex-col h-full w-[400px] flex-shrink-0 relative">
-          <div className="p-8 flex justify-start">
-            <button 
-              onClick={onClose}
-              className="p-3 border border-gray-200 rounded-full hover:bg-gray-100 transition-colors"
-            >
-              <X size={20} className="text-black stroke-[1.5]" />
-            </button>
-          </div>
+        {/* DUAL-BRAND SIDE RIBBON */}
+        <div className="absolute top-0 left-0 bottom-0 w-[4px] flex flex-col z-[130]">
+           <div className="flex-1 bg-[#F26522]" />
+           <div className="flex-1 bg-[#1E1B6E]" />
+        </div>
 
-          <div className="flex-1 overflow-y-auto px-10 pb-6 custom-scrollbar">
-            <ul className="flex flex-col gap-6 mt-2">
+        {/* HEADER AREA */}
+        <div className="p-8 flex items-center justify-between border-b border-white/5">
+           <span className="text-white font-black text-xs tracking-[0.4em] uppercase opacity-40">
+             Menu
+           </span>
+           <button 
+             onClick={onClose}
+             className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white transition-all duration-300 hover:bg-[#F26522] hover:border-[#F26522] active:scale-90 group"
+           >
+             <X size={18} className="stroke-[3]" />
+           </button>
+        </div>
+
+        {/* COMPACT ACCORDION CONTENT */}
+        <div className="flex-1 overflow-y-auto custom-scrollbar pt-6 px-4">
+           <ul className="flex flex-col">
               {categories.map((cat, idx) => {
                 const isObj = typeof cat === 'object';
                 const name = isObj ? cat.name : cat;
-                const hasItemSubMenu = isObj && cat.subCategories && cat.subCategories.length > 0;
-                const isActive = activeCategoryIndex === idx;
+                const subCats = isObj && cat.subCategories ? cat.subCategories : [];
+                const hasSub = subCats.length > 0;
+                const isExpanded = expandedIdx === idx;
 
                 return (
-                  <li 
-                    key={idx} 
-                    className="flex items-center justify-between group cursor-pointer"
-                    onMouseEnter={() => setActiveCategoryIndex(idx)}
-                  >
-                    <span className={`relative text-lg font-normal tracking-wider transition-all duration-300 ${!hasItemSubMenu ? 'inline-block py-1 group-hover:text-black' : 'group-hover:translate-x-2'}`}>
-                      {name}
-                      {!hasItemSubMenu && (
-                         <span className="absolute left-0 bottom-[2px] w-full h-[2px] bg-black origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                  <li key={idx} className="mb-2">
+                    <button
+                      onClick={() => hasSub ? toggleCategory(idx) : null}
+                      className={`w-full flex items-center justify-between p-4 rounded-xl transition-all duration-300 ${
+                        isExpanded ? 'bg-white/5' : 'hover:bg-white/[0.03]'
+                      }`}
+                    >
+                      <span className={`text-[15px] font-black tracking-widest uppercase transition-all duration-300 ${
+                        isExpanded ? 'text-[#F26522] scale-105 origin-left' : 'text-white/60 group-hover:text-white'
+                      }`}>
+                        {name}
+                      </span>
+                      {hasSub && (
+                        <div className={`transition-transform duration-500 ${isExpanded ? 'rotate-180 text-[#F26522]' : 'text-white/20'}`}>
+                           <ChevronDown size={18} className="stroke-[3]" />
+                        </div>
                       )}
-                    </span>
-                    {!hideChevrons && (
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-300 ${isActive ? 'bg-black text-white' : 'bg-gray-50 group-hover:bg-black group-hover:text-white'}`}>
-                        <ChevronRight size={14} className="stroke-[1.5]" />
-                      </div>
-                    )}
+                    </button>
+
+                    {/* NESTED SUB-MENU */}
+                    <AnimatePresence>
+                      {isExpanded && hasSub && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <ul className="py-2 pl-4 flex flex-col gap-1">
+                             {subCats.map((sub, sIdx) => (
+                               <li key={sIdx}>
+                                 <button className="w-full flex items-center gap-4 p-3 rounded-lg hover:bg-[#F26522]/10 group transition-colors">
+                                    <div className="w-8 h-8 flex-shrink-0 bg-white/5 rounded-md flex items-center justify-center p-1 group-hover:bg-[#F26522]/20 transition-colors">
+                                       <img 
+                                         src={sub.image} 
+                                         alt={sub.name} 
+                                         className="w-full h-full object-contain" 
+                                       />
+                                    </div>
+                                    <span className="text-[13px] font-bold text-white/40 group-hover:text-white transition-colors tracking-wide">
+                                      {sub.name}
+                                    </span>
+                                 </button>
+                               </li>
+                             ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </li>
                 );
               })}
-            </ul>
-          </div>
-
-          {activeImageContent && activeImageContent.isRawImage ? (
-            <div className="p-6 mt-auto flex flex-col justify-center items-center drop-shadow-2xl hover:-translate-y-2 transition-transform duration-500 ease-out cursor-pointer">
-              <img 
-                  src={activeImageContent.src} 
-                  alt={activeImageContent.alt} 
-                  className={`max-h-56 max-w-full object-contain ${activeImageContent.noRotate ? '' : '-rotate-6 rounded-sm shadow-xl'}`}
-                />
-              {activeImageContent.title && (
-                <h3 className={`mt-4 text-black text-sm font-bold tracking-wider ${activeImageContent.noRotate ? '' : 'text-center'}`}>{activeImageContent.title}</h3>
-              )}
-            </div>
-          ) : (
-            activeImageContent && (
-              <div className="p-6 mt-auto">
-                <div className="relative w-full h-64 rounded-xl overflow-hidden group cursor-pointer bg-black">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity group-hover:opacity-60"></div>
-                  
-                  <img 
-                    key={activeImageContent.src}
-                    src={activeImageContent.src} 
-                    alt={activeImageContent.alt} 
-                    className="w-full h-full object-cover animate-fade-in group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-
-                  <div className="absolute bottom-5 left-5 z-20 pointer-events-none">
-                    {activeImageContent.badge && (
-                      <span className="bg-[#481e9f] text-white text-[10px] font-bold px-2 py-1 rounded tracking-widest mb-3 inline-block">
-                        {activeImageContent.badge}
-                      </span>
-                    )}
-                    <h3 className="text-white text-xl font-bold tracking-wider">{activeImageContent.title}</h3>
-                  </div>
-
-                  {isSlider && bottomImage.length > 1 && (
-                    <div className="absolute bottom-5 right-5 z-30 flex gap-2">
-                      <button 
-                        onClick={handlePrevSlide}
-                        className="w-7 h-7 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-colors shadow-sm"
-                      >
-                        <ChevronLeft size={14} className="text-black stroke-[3]" />
-                      </button>
-                      <button 
-                        onClick={handleNextSlide}
-                        className="w-7 h-7 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-colors shadow-sm"
-                      >
-                        <ChevronRight size={14} className="text-black stroke-[3]" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )
-          )}
+           </ul>
         </div>
 
-        {/* RIGHT COLUMN - Subcategories */}
-        <div className={`flex flex-col h-full bg-white border-l-2 border-gray-100 flex-1 overflow-hidden transition-all duration-300 ${hasSubMenu ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="flex-1 overflow-y-auto pt-[120px] px-12 custom-scrollbar pb-12">
-            {hasSubMenu && (
-              <ul className="flex flex-col gap-6 animate-fade-in">
-                {activeCat.subCategories.map((sub, i) => (
-                  <li key={i} className="flex items-center gap-6 cursor-pointer group">
-                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center">
-                      <img 
-                        src={sub.image} 
-                        alt={sub.name} 
-                        className="w-[120%] h-[120%] object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                    <span className="relative text-[14px] font-medium tracking-wider text-gray-800 transition-colors inline-block py-1">
-                      {sub.name}
-                      <span className="absolute left-0 bottom-0 w-full h-[1.5px] bg-black origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+        {/* MINIMALIST FOOTER */}
+        <div className="p-8 border-t border-white/5 bg-white/[0.01]">
+           <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                 <span className="text-[9px] font-black tracking-[0.3em] text-white/20 uppercase">
+                    Heritage • 75 Years
+                 </span>
+                 <div className="flex gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#F26522]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#1E1B6E]" />
+                 </div>
+              </div>
+              <p className="text-[10px] text-white/30 leading-relaxed font-medium">
+                Legendary craft from Denmark, powering the beautiful game since 1947.
+              </p>
+           </div>
         </div>
 
       </div>
+
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { width: 2px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+      `}</style>
     </>
   );
 };

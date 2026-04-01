@@ -173,8 +173,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+      <nav className="sticky top-0 z-[1000] w-full bg-[#0A0A0A] border-b border-white/5 shadow-2xl translate-y-0">
+        <div className="w-full px-[5%] h-16 md:h-20 flex items-center justify-between">
 
           <div className="flex items-center gap-3 group cursor-pointer">
             <div className="relative w-9 h-9 md:w-11 md:h-11 flex items-center justify-center overflow-hidden">
@@ -189,7 +189,6 @@ const Navbar = () => {
             </span> */}
           </div>
 
-          {/* Desktop Navigation Links — hidden below lg */}
           <div className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <div
@@ -209,13 +208,14 @@ const Navbar = () => {
                   }
                 }}
               >
-                <span className={`nav-link text-[10px] md:text-[11px] font-medium tracking-[0.15em] ${activeDrawer === link ? 'font-bold' : ''}`}>
+                <span className={`nav-link text-[10px] md:text-[11px] font-bold tracking-[0.15em] transition-colors duration-200 
+                  ${activeDrawer === link ? 'text-sports-primary' : 'text-white group-hover:text-sports-primary'}`}>
                   {link}
                 </span>
                 {(drawerData[link] || link === 'PARTNER WITH US') && (
                   <ChevronDown
                     size={14}
-                    className={`transition-transform duration-300 ${activeDrawer === link ? 'rotate-180' : 'group-hover:rotate-180'}`}
+                    className={`transition-all duration-300 ${activeDrawer === link ? 'rotate-180 text-sports-primary' : 'group-hover:rotate-180 group-hover:text-sports-primary text-white/70'}`}
                   />
                 )}
               </div>
@@ -226,10 +226,10 @@ const Navbar = () => {
           <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
             {/* Language — desktop only */}
             <div className="hidden lg:flex items-center gap-2 cursor-pointer hover:opacity-70 transition-opacity">
-              <div className="w-5 h-5 rounded-full overflow-hidden flex items-center justify-center bg-blue-600">
+              <div className="w-5 h-5 rounded-full overflow-hidden flex items-center justify-center bg-sports-primary">
                 <Globe size={14} className="text-white" />
               </div>
-              <span className="text-xs font-normal flex items-center gap-1">
+              <span className="text-xs font-normal flex items-center gap-1 text-white/90">
                 International
               </span>
             </div>
@@ -237,21 +237,21 @@ const Navbar = () => {
             {/* Search — always visible */}
             <button
               id="search-toggle"
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="p-2 hover:bg-sports-primary/20 rounded-full transition-colors text-white"
               onClick={() => setSearchOpen(true)}
               aria-label="Open search"
             >
-              <Search size={20} strokeWidth={1.5} className="md:w-[22px] md:h-[22px]" />
+              <Search size={20} strokeWidth={2} className="md:w-[22px] md:h-[22px]" />
             </button>
 
             {/* Hamburger — visible on mobile & tablet (< lg) */}
             <button
               id="mobile-menu-toggle"
-              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 transition-colors gap-[5px]"
+              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-full hover:bg-sports-primary/20 transition-colors gap-[5px] text-white"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open menu"
             >
-              <Menu size={22} strokeWidth={1.8} className="text-black" />
+              <Menu size={22} strokeWidth={2} />
             </button>
           </div>
         </div>

@@ -34,11 +34,13 @@ const Hero = () => {
           </h1>
 
           <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: '#fff', color: '#000' }}
+            whileHover={{ scale: 1.05, filter: 'brightness(1.1)' }}
             whileTap={{ scale: 0.97 }}
-            className="border border-white bg-transparent text-white font-semibold tracking-widest uppercase text-[9px] md:text-sm px-4 py-2 md:px-10 md:py-4 transition-all duration-300 hover:bg-white hover:text-black"
+            className="relative px-10 py-5 bg-[#F26522] text-white font-black tracking-widest uppercase text-[10px] md:text-sm transition-all duration-300 shadow-[0_0_40px_rgba(242,101,34,0.4)] md:min-w-[320px] group border border-white/20"
           >
-            Read about the Czech league and other top leagues
+            <span className="relative z-20 group-hover:scale-105 transition-transform block">
+              Read about the Czech league and other top leagues
+            </span>
           </motion.button>
         </motion.div>
       </div>

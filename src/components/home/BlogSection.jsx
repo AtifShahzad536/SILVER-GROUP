@@ -42,8 +42,8 @@ function CalendarIcon() {
 
 function BlogCard({ blog }) {
   return (
-    <article className="group border-b border-gray-100 overflow-hidden cursor-pointer hover:bg-gray-50 transition-colors duration-200 bg-white h-full">
-      <div className="w-full h-[200px] bg-gray-100 overflow-hidden">
+    <article className="group border-b border-white/5 overflow-hidden cursor-pointer hover:bg-white/[0.03] transition-colors duration-200 bg-sports-surface h-full">
+      <div className="w-full h-[200px] bg-white/5 overflow-hidden">
         <img
           src={blog.image}
           alt={blog.title}
@@ -52,16 +52,16 @@ function BlogCard({ blog }) {
         />
       </div>
       <div className="p-4 md:p-5">
-        <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-gray-400 mb-2">
+        <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-sports-primary mb-2">
           {blog.tag}
         </span>
-        <h3 className="text-[15px] font-bold text-gray-900 leading-snug mb-3">
+        <h3 className="text-[15px] font-bold text-white leading-snug mb-3 group-hover:text-sports-primary transition-colors">
           {blog.title}
         </h3>
-        <p className="text-[13px] text-gray-500 leading-relaxed mb-4">
+        <p className="text-[13px] text-white/60 leading-relaxed mb-4">
           {blog.excerpt}
         </p>
-        <div className="flex items-center gap-1.5 text-[12px] text-gray-400">
+        <div className="flex items-center gap-1.5 text-[12px] text-white/40">
           <CalendarIcon />
           <span>{blog.date}</span>
         </div>
@@ -87,7 +87,7 @@ export default function BlogSection() {
   };
 
   return (
-    <section className="w-full bg-white py-[5%] px-[5%]">
+    <section className="w-full bg-sports-secondary py-[5%] px-[5%] border-t border-white/5 shadow-2xl">
       <div className="w-full">
 
        
@@ -115,7 +115,7 @@ export default function BlogSection() {
           <div className="flex items-center justify-center gap-4 mt-5">
             <button
               onClick={prev}
-              className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-gray-800 transition-colors"
+              className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-sports-primary hover:text-sports-primary transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -127,14 +127,14 @@ export default function BlogSection() {
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`rounded-full transition-all duration-200 ${i === current ? "w-4 h-2 bg-gray-900" : "w-2 h-2 bg-gray-300"}`}
+                  className={`rounded-full transition-all duration-200 ${i === current ? "w-4 h-2 bg-sports-primary" : "w-2 h-2 bg-white/20"}`}
                 />
               ))}
             </div>
 
             <button
               onClick={next}
-              className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-gray-800 transition-colors"
+              className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:border-sports-primary hover:text-sports-primary transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

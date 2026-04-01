@@ -30,20 +30,20 @@ const footerLinks = {
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-black text-white">
+    <footer className="w-full bg-sports-secondary text-white border-t border-white/5">
       {/* Top Section */}
-      <div className="max-w-[1440px] mx-auto px-6 pt-20 pb-12">
+      <div className="w-full px-[5%] pt-20 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-12">
 
           {/* Brand Column */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-6">
               <div className="relative w-10 h-10 flex items-center justify-center">
-                <div className="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[35px] border-b-white" />
+                <img src="/logo_silverstar1.png" alt="Silver Star" className="w-full h-full object-contain" />
               </div>
-              <span className="text-2xl font-black tracking-tighter">SELECT</span>
+              <span className="text-2xl font-black tracking-tighter text-white">SILVER STAR</span>
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed mb-8 max-w-[260px]">
+            <p className="text-sm text-white/50 leading-relaxed mb-8 max-w-[260px]">
               Since 1947, Select Sport has been manufacturing premium sports equipment trusted by professional athletes and leagues worldwide.
             </p>
             {/* Social Icons */}
@@ -57,7 +57,7 @@ const Footer = () => {
                 <button
                   key={label}
                   aria-label={label}
-                  className="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all duration-200"
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:bg-sports-primary hover:text-white hover:border-sports-primary transition-all duration-300"
                 >
                   {icon}
                 </button>
@@ -74,7 +74,7 @@ const Footer = () => {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-gray-400 hover:text-white transition-colors duration-200 tracking-wide"
+                      className="text-sm text-white/50 hover:text-sports-primary transition-colors duration-200 tracking-wide font-medium"
                     >
                       {link}
                     </a>
@@ -96,9 +96,9 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="bg-gray-900 text-white text-sm px-5 py-3 border border-gray-700 focus:outline-none focus:border-white transition-colors w-full md:w-72 placeholder:text-gray-600"
+                className="bg-white/5 text-white text-sm px-5 py-3 border border-white/10 focus:outline-none focus:border-sports-primary transition-colors w-full md:w-72 placeholder:text-white/30"
               />
-              <button className="bg-white text-black px-6 py-3 text-xs font-black tracking-widest hover:bg-gray-200 transition-colors whitespace-nowrap">
+              <button className="bg-sports-primary text-white px-6 py-3 text-xs font-black tracking-widest hover:brightness-110 transition-all whitespace-nowrap shadow-lg">
                 SUBSCRIBE
               </button>
             </div>
@@ -107,8 +107,8 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-800">
-        <div className="max-w-[1440px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="border-t border-white/5">
+        <div className="w-full px-[5%] py-5 flex flex-col md:flex-row items-center justify-center md:justify-between gap-3 text-center md:text-left">
           <p className="text-xs text-gray-600 tracking-wide">
             © {new Date().getFullYear()} Select Sport A/S. All rights reserved.
           </p>

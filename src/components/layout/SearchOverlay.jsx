@@ -1,26 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, TrendingUp, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-/* ─── Suggestion pool (drawn from your product data) ─────────────────── */
+/* ─── Suggestion pool ─────────────────── */
 const ALL_SUGGESTIONS = [
-  // Balls
   'Footballs', 'Handballs', 'Futsal Balls', 'Gym Balls', 'Other Balls',
-  // Clothing
   'Match & Training Wear', 'Leisure Wear', 'Goalkeeper Wear',
   'Referee Wear', 'Baselayer', 'Accessories',
-  // Team gear
   'Shin Guards', 'Ball & Sports Bags', 'Resin Products',
   'Ball Equipment', 'Training Equipment', 'Referee Equipment',
   'Training Packages', 'Bibs & Captains Band',
-  // Care
   'Sports Supports', 'Sports Care',
-  // My Training
   'Training Bands',
-  // GK
   'Goalkeeper Gloves',
-  // Sports
   'Football', 'Handball', 'Futsal',
-  // General
   'Kids Gear', 'Select Sport', 'Sponsorships', 'Catalogue',
   'Select Lab', 'About Select', 'Contact', 'Press & News',
 ];
@@ -36,28 +29,24 @@ const SearchOverlay = ({ isOpen, onClose }) => {
   const [activeIdx, setActiveIdx] = useState(-1);
   const inputRef = useRef(null);
 
-  /* Focus input when overlay opens */
   useEffect(() => {
     if (isOpen) {
       setQuery('');
       setSuggestions([]);
       setActiveIdx(-1);
-      setTimeout(() => inputRef.current?.focus(), 80);
+      setTimeout(() => inputRef.current?.focus(), 150);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  /* Escape key */
   useEffect(() => {
     const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
-  /* Filter suggestions */
   const handleChange = (e) => {
     const val = e.target.value;
     setQuery(val);
@@ -72,7 +61,6 @@ const SearchOverlay = ({ isOpen, onClose }) => {
     setSuggestions(filtered);
   };
 
-  /* Keyboard navigation */
   const handleKeyDown = (e) => {
     if (!suggestions.length) return;
     if (e.key === 'ArrowDown') {
@@ -82,146 +70,118 @@ const SearchOverlay = ({ isOpen, onClose }) => {
       e.preventDefault();
       setActiveIdx((p) => Math.max(p - 1, -1));
     } else if (e.key === 'Enter' && activeIdx >= 0) {
-      setQuery(suggestions[activeIdx]);
-      setSuggestions([]);
+      pickSuggestion(suggestions[activeIdx]);
     }
   };
 
   const pickSuggestion = (s) => {
     setQuery(s);
     setSuggestions([]);
-    inputRef.current?.focus();
+    console.log("Searching for:", s);
   };
 
   const showSuggestions = suggestions.length > 0;
-  const showPopular = query.trim().length === 0;
 
   return (
-    <>
-      {/* ── Backdrop ─────────────────────────────────────────────────── */}
-      <div
-        className={`fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={onClose}
-      />
-
-      {/* ── Panel ────────────────────────────────────────────────────── */}
-      <div
-        className={`fixed top-0 left-0 right-0 z-[205] bg-white shadow-2xl
-          transition-all duration-[350ms] ease-[cubic-bezier(0.19,1,0.22,1)]
-          ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}
-      >
-        {/* Search bar row */}
-        <div className="max-w-[860px] mx-auto px-4 sm:px-6 flex items-center gap-3 h-[72px] sm:h-[90px]">
-          <Search
-            size={22}
-            strokeWidth={1.8}
-            className="text-gray-400 flex-shrink-0"
-          />
-
-          <input
-            ref={inputRef}
-            type="text"
-            value={query}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-            placeholder="Search for products, gear, sports…"
-            className="flex-1 text-base sm:text-xl font-medium text-black placeholder-gray-300
-                       bg-transparent outline-none border-none tracking-wide"
-            autoComplete="off"
-            spellCheck="false"
-          />
-
-          {/* Clear */}
-          {query && (
-            <button
-              onClick={() => { setQuery(''); setSuggestions([]); inputRef.current?.focus(); }}
-              className="p-1.5 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
-            >
-              <X size={18} className="text-gray-400" />
-            </button>
-          )}
-
-          {/* Close */}
-          <button
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* ── Backdrop ─────────────────────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[2000] bg-black/40 backdrop-blur-md"
             onClick={onClose}
-            className="ml-1 p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors flex-shrink-0"
-            aria-label="Close search"
+          />
+
+          {/* ── Minimalist Search Panel (Dark Mode) ────────────────────── */}
+          <motion.div
+            initial={{ y: '-100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '-100%' }}
+            transition={{ type: 'tween', duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
+            className="fixed top-0 left-0 right-0 z-[2010] bg-black shadow-2xl border-b border-white/5"
           >
-            <X size={18} className="text-black" />
-          </button>
-        </div>
+            {/* Fluid 5% Gutter Sync */}
+            <div className="w-full px-[5%] py-6 md:py-10">
+              
+              <div className="flex items-center justify-between gap-6 md:gap-12">
+                
+                {/* Clean Input Field */}
+                <div className="flex-1 flex items-center gap-4 group">
+                  <Search size={22} className="text-white/20 group-focus-within:text-[#F26522] transition-colors" />
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={query}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Search for products, gear, sports…"
+                    className="flex-1 bg-transparent border-none outline-none text-white text-lg md:text-2xl font-medium placeholder:text-white/20"
+                  />
+                  {query && (
+                    <button onClick={() => { setQuery(''); setSuggestions([]); }} className="text-white/20 hover:text-white transition-colors p-2">
+                       <X size={20} />
+                    </button>
+                  )}
+                </div>
 
-        {/* Divider */}
-        <div className="h-px bg-gray-100 mx-4 sm:mx-0" />
-
-        {/* ── Suggestions / Popular ──────────────────────────────────── */}
-        <div className="max-w-[860px] mx-auto px-4 sm:px-6 pb-6">
-
-          {/* Live suggestions */}
-          {showSuggestions && (
-            <ul className="pt-3">
-              {suggestions.map((s, i) => (
-                <li
-                  key={s}
-                  className={`flex items-center justify-between px-3 py-3 rounded-lg cursor-pointer transition-colors group ${
-                    i === activeIdx ? 'bg-gray-100' : 'hover:bg-gray-50'
-                  }`}
-                  onMouseDown={(e) => { e.preventDefault(); pickSuggestion(s); }}
+                {/* Simple Close Button */}
+                <button 
+                  onClick={onClose} 
+                  className="flex items-center gap-2 px-4 py-2 text-white/40 hover:text-white transition-colors font-semibold text-xs tracking-widest uppercase"
                 >
-                  <div className="flex items-center gap-3">
-                    <Search size={15} className="text-gray-300 flex-shrink-0" />
-                    <span className="text-sm font-medium text-gray-800 tracking-wide">
-                      {/* Bold the matching part */}
-                      {s.toLowerCase().startsWith(query.toLowerCase()) ? (
-                        <>
-                          <strong className="text-black font-bold">{s.slice(0, query.length)}</strong>
-                          {s.slice(query.length)}
-                        </>
-                      ) : s}
-                    </span>
+                  <span>CLOSE</span>
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* Suggestions / Popular Rows */}
+              <div className="mt-8 border-t border-white/5 pt-6">
+                
+                {showSuggestions ? (
+                  <div className="flex flex-col gap-1 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                     <span className="text-white/20 font-bold text-[10px] tracking-[0.2em] uppercase mb-3">Top Matches</span>
+                     {suggestions.map((s, i) => (
+                        <button
+                          key={s}
+                          onClick={() => pickSuggestion(s)}
+                          className={`flex items-center justify-between p-4 rounded-xl transition-all text-left ${
+                            i === activeIdx ? 'bg-white text-black' : 'text-white/40 hover:bg-white/5 hover:text-white font-medium'
+                          }`}
+                        >
+                           <span className="text-sm md:text-base">{s}</span>
+                           <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </button>
+                     ))}
                   </div>
-                  <ArrowRight size={14} className="text-gray-300 group-hover:text-black transition-colors" />
-                </li>
-              ))}
-            </ul>
-          )}
+                ) : (
+                  <div className="flex flex-col md:flex-row md:items-center gap-6">
+                     <div className="flex items-center gap-2 flex-shrink-0">
+                       <TrendingUp size={16} className="text-white/20" />
+                       <span className="text-white/20 font-bold text-[10px] tracking-[0.2em] uppercase">Popular Searches</span>
+                     </div>
+                     <div className="flex flex-wrap gap-2">
+                        {POPULAR.map(term => (
+                          <button 
+                            key={term}
+                            onClick={() => pickSuggestion(term)}
+                            className="px-4 py-2 bg-white/5 border border-white/5 rounded-full text-white/50 text-[11px] font-bold hover:bg-white hover:text-black transition-all"
+                          >
+                            {term}
+                          </button>
+                        ))}
+                     </div>
+                  </div>
+                )}
+              </div>
 
-          {/* Popular searches (shown when input is empty) */}
-          {showPopular && (
-            <div className="pt-5">
-              <div className="flex items-center gap-2 mb-3">
-                <TrendingUp size={14} className="text-gray-400" />
-                <span className="text-[11px] font-bold tracking-[0.15em] text-gray-400 uppercase">
-                  Popular searches
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {POPULAR.map((term) => (
-                  <button
-                    key={term}
-                    onMouseDown={(e) => { e.preventDefault(); pickSuggestion(term); }}
-                    className="px-4 py-2 border border-gray-200 rounded-full text-xs font-medium
-                               tracking-wide text-gray-700 hover:border-black hover:text-black
-                               hover:bg-black hover:text-white transition-all duration-200"
-                  >
-                    {term}
-                  </button>
-                ))}
-              </div>
             </div>
-          )}
-
-          {/* No results */}
-          {!showPopular && !showSuggestions && query.trim().length > 0 && (
-            <p className="pt-6 text-sm text-gray-400 tracking-wide">
-              No results for "<span className="text-black font-semibold">{query}</span>"
-            </p>
-          )}
-        </div>
-      </div>
-    </>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 

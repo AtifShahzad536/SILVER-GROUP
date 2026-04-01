@@ -18,11 +18,13 @@ export default {
         'fluid-padding': 'clamp(1.5rem, 6vw, 6rem)',
       },
       colors: {
-        brand: {
-          primary: '#4f46e5', // Indigo 600
-          secondary: '#7c3aed', // Violet 600
-          dark: '#0f172a',    // Slate 900
-          light: '#f8fafc',   // Slate 50
+        sports: {
+          primary: '#F26522',   // Radiant Orange
+          secondary: '#0A0A0A', // Midnight Black
+          accent: '#1E1B6E',    // Branded Blue (Limited)
+          surface: '#1A1A1A',   // Dark Gray Surface
+          white: '#FFFFFF',
+          slate: '#94A3B8'
         }
       }
     },

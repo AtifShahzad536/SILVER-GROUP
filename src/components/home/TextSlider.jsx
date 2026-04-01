@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export default function TextSlider() {
@@ -19,52 +20,59 @@ export default function TextSlider() {
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
-  };
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const goToSlide = (index) => setCurrentSlide(index);
 
   return (
-    <div className="w-full bg-gray-150 py-20">
-      <div className="relative text-center">
-       
+    <section className="relative w-full bg-[#0A0A0A] overflow-hidden border-b border-white/10">
+      
+      {/* Branded Split-Bar Top Accent */}
+      <div className="absolute top-0 left-0 right-0 h-[4px] flex z-20">
+         <div className="h-full bg-[#F26522]" style={{ flex: '0 0 50%', clipPath: 'polygon(0 0, 100% 0, 70% 100%, 0% 100%)' }}></div>
+         <div className="h-full bg-[#1E1B6E]" style={{ flex: '0 0 50%', marginLeft: '-5%', clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)' }}></div>
+      </div>
 
-        <div className="relative overflow-hidden h-48 flex items-center justify-center">
-          <div 
-            className="transition-transform duration-500 ease-in-out flex"
-            style={{
-              transform: `translateX(-${currentSlide * 100}%)`,
-              width: `${slides.length * 100}%`,
-            }}
-          >
-            {slides.map((slide, index) => (
-              <div key={index} className="w-full flex-shrink-0 flex flex-col items-center justify-center px-4">
-                <p className="relative text-gray-800 font-black text-3xl md:text-4xl font-bold mb-4 px-24 text-center">
-                  <span className="text-gray-300 text-7xl md:text-8xl font-serif absolute -top-8 left-12 opacity-75">"</span>
-                  <span className="text-2xl md:text-3xl">{slide.quote}</span>
-                  <span className="text-gray-300 text-7xl md:text-8xl font-serif absolute -bottom-8 right-12 opacity-75">"</span>
-                </p>
-                <p className="text-base md:text-lg text-gray-600 uppercase tracking-wider font-medium">{slide.author}</p>
-              </div>
-            ))}
-          </div>
+      <div className="max-w-[1200px] mx-auto px-6 py-16 md:py-20 flex flex-col items-center justify-center min-h-[350px]">
+        
+        {/* Quote Content */}
+        <div className="relative w-full text-center mb-8">
+           <span className="text-4xl md:text-5xl font-serif text-white/20 absolute -top-8 left-0 md:left-12">“</span>
+           
+           <AnimatePresence mode="wait">
+             <motion.div
+               key={currentSlide}
+               initial={{ opacity: 0, x: 10 }}
+               animate={{ opacity: 1, x: 0 }}
+               exit={{ opacity: 0, x: -10 }}
+               transition={{ duration: 0.4, ease: 'easeOut' }}
+               className="px-8 md:px-24"
+             >
+               <h3 className="text-white font-black text-xl md:text-3xl uppercase tracking-tight leading-snug mb-6 max-w-[850px] mx-auto">
+                 {slides[currentSlide].quote}
+               </h3>
+               <div className="flex items-center justify-center space-x-3">
+                 <div className="w-8 h-[1.5px] bg-[#F26522] opacity-50" />
+                 <p className="text-slate-400 font-bold text-xs md:text-sm uppercase tracking-widest">
+                   {slides[currentSlide].author}
+                 </p>
+                 <div className="w-8 h-[1.5px] bg-[#1E1B6E] opacity-50" />
+               </div>
+             </motion.div>
+           </AnimatePresence>
+
+           <span className="text-4xl md:text-5xl font-serif text-white/20 absolute -bottom-8 right-0 md:right-12">”</span>
         </div>
 
-        {/* Navigation Arrows and Dots */}
-        <div className="flex justify-center items-center mt-12 space-x-8">
-          {/* Left Arrow */}
+        {/* Navigation - Solid Color Minimalist Arrows */}
+        <div className="flex items-center space-x-8">
+          
           <button
             onClick={prevSlide}
-            className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center shadow-md hover:bg-gray-300 transition-all duration-300 hover:scale-110"
+            aria-label="Previous slide"
+            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-[#F26522] hover:border-[#F26522] hover:scale-110 active:scale-95 group"
           >
-            <FaChevronLeft className="text-black text-sm" />
+            <FaChevronLeft className="text-sm group-hover:-translate-x-0.5 transition-transform" />
           </button>
           
           {/* Navigation Dots */}
@@ -73,22 +81,25 @@ export default function TextSlider() {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentSlide ? 'bg-gray-600' : 'bg-gray-300'
+                className={`transition-all duration-300 rounded-full h-1.5 ${
+                  index === currentSlide 
+                  ? 'w-6 bg-[#F26522]' 
+                  : 'w-1.5 bg-white/10 hover:bg-white/30'
                 }`}
               />
             ))}
           </div>
           
-          {/* Right Arrow */}
           <button
             onClick={nextSlide}
-            className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center shadow-md hover:bg-gray-300 transition-all duration-300 hover:scale-110"
+            aria-label="Next slide"
+            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-[#F26522] hover:border-[#F26522] hover:scale-110 active:scale-95 group"
           >
-            <FaChevronRight className="text-black text-sm" />
+            <FaChevronRight className="text-sm group-hover:translate-x-0.5 transition-transform" />
           </button>
+
         </div>
       </div>
-    </div>
+    </section>
   );
 }
