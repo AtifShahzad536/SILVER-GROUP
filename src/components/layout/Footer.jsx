@@ -37,11 +37,11 @@ const Footer = () => {
 
           {/* Brand Column */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <img src="/logo_silverstar1.png" alt="Silver Star" className="w-full h-full object-contain" />
+            <div className="flex items-center gap-3 mb-6 group cursor-pointer">
+              <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden">
+                <img src="/logo_silverstar1.png" alt="Silver Star Group" className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110" />
               </div>
-              <span className="text-2xl font-black tracking-tighter text-white">SILVER STAR</span>
+              <span className="text-xl font-bold tracking-tight text-white">Silver Star Group</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed mb-8 max-w-[260px]">
               Since 1947, Select Sport has been manufacturing premium sports equipment trusted by professional athletes and leagues worldwide.
